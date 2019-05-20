@@ -5,12 +5,14 @@ const bodyParser = require('body-parser')
 
 const app = express()
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('/api/thoughts/',require('./server/routes/thoughts-route'))
+app.use(express.static('./client/mern_azure_example/build/'))
 
-app.get('/',(req,res)=>{
-    res.sendFile('index.html',{root:__dirname})
+app.use('/api/thoughts/', require('./server/routes/thoughts-route'))
+
+app.get('/*', (req, res) => {
+    res.sendFile('index.html', { root: __dirname + '/client/mern_azure_example/build/' })
 })
-const {PORT} = process.env
-app.listen(PORT,()=> console.log(`Azure example happening on port ${PORT}`))
+const { PORT } = process.env
+app.listen(PORT, () => console.log(`Azure example happening on port ${PORT}`))
