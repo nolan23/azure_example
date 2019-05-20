@@ -8,10 +8,17 @@ router.get('/',(req,res,next)=>{
     })
 })
 
+const data=[
+    "aku",
+    "sayang",
+    "samamu",
+    "guh",
+    "<3",
+]
 router.post('/seed', (req,res,next)=>{
-    for(let x=0;x<5;x++){
+    for(let x=0;x<data.length;x++){
         const newThought = new Thought({
-            thought:`This is thought ${Math.random().toFixed(5)}`,
+            thought:data[x],
             dateCreated:new Date(),
         })
         newThought.save(err=>{
